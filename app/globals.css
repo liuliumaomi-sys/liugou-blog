@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: #26342f;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(223,169,164,.2), transparent 24rem),
+    radial-gradient(circle at 88% 48%, rgba(151,177,153,.22), transparent 28rem),
+    #f7f1e7;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .3; z-index: 20;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+}
+::selection { background: #dfa9a4; color: #26342f; }
+.art-card { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease; }
+.art-card:hover { transform: translateY(-8px) rotate(.2deg); box-shadow: 0 28px 70px rgba(68,76,63,.15); }
