@@ -1,21 +1,27 @@
-export type Exhibit = {
-  id: number;
+export type Post = {
+  id: string;
+  slug: string;
   title: string;
   date: string;
   category: string;
   excerpt: string;
-  color: string;
+  content: string;
+  tags: string[];
+  cover: string;
+  status: 'public' | 'draft' | 'private';
+  type: 'life' | 'study' | 'project';
 };
 
-export const exhibits: Exhibit[] = [
-  { id: 1, title: '在代码的缝隙里种花', date: '2026.08.22', category: '生活札记', excerpt: '关于创造、缓慢生活，以及如何为普通日子保留一点想象力。', color: '#c9d8c6' },
-  { id: 2, title: '我的数字房间', date: '2026.07.16', category: '设计思考', excerpt: '当网页不再只是一张页面，它能否成为一个愿意让人停留的房间？', color: '#e7c1b8' },
-  { id: 3, title: '一次温柔的重构', date: '2026.06.02', category: '工程手记', excerpt: '整理旧代码，也是在整理过去的自己；保留痕迹，然后继续生长。', color: '#d8cfb9' },
-  { id: 4, title: '晚风、散步与灵感', date: '2026.05.18', category: '灵感采集', excerpt: '一些没有目的的散步，和途中捡到的颜色、声音与念头。', color: '#b8c8c4' },
+export const initialPosts: Post[] = [
+  { id: '1', slug: 'hello-corner', title: '欢迎来到 Liugou’s Corner', date: '2026-08-22', category: '生活碎片', excerpt: '把这里重新收拾成一个可以慢慢记录生活与学习的小角落。', tags: ['日常', '开始'], cover: 'from-[#c9d8c6] to-[#efe4d3]', status: 'public', type: 'life', content: `这里不是展览，也不需要一条规定好的参观路线。\n\n我想把生活里值得记住的小事、学习过程中踩过的坑，还有正在做的项目，慢慢放在这里。\n\n如果你愿意，可以看看文章、留下一句话，或者去和灰灰玩一会儿。` },
+  { id: '2', slug: 'learning-notes', title: '学习笔记应该怎样留下来', date: '2026-08-18', category: '学习手账', excerpt: '比起收藏一百个链接，我更想留下真正理解过的东西。', tags: ['学习方法', '笔记'], cover: 'from-[#d6c9b6] to-[#f4ddd3]', status: 'public', type: 'study', content: `学习笔记不应该只是资料的搬运。\n\n我会尽量记录问题是什么、尝试过哪些方法，以及最后为什么选择现在的答案。\n\n\`\`\`ts\nconst learning = curiosity + practice;\n\`\`\`` },
+  { id: '3', slug: 'weekend-walk', title: '周末散步时遇见的晚风', date: '2026-08-11', category: '个人日常', excerpt: '没有目的地走了一会儿，顺便捡回几段很轻的心情。', tags: ['散步', '随手记'], cover: 'from-[#b8c8c4] to-[#ead6c9]', status: 'public', type: 'life', content: `傍晚的风刚好，路边的树影被拉得很长。\n\n有时候什么都不完成，也是一种很重要的休息。` },
+  { id: '4', slug: 'blog-rebuild', title: '把旧博客重新搭起来', date: '2026-08-03', category: '项目记录', excerpt: '从一个空壳开始，重新想象属于自己的长期数字空间。', tags: ['Next.js', '项目'], cover: 'from-[#aebfae] to-[#e7c1b8]', status: 'public', type: 'project', content: `这个博客使用 Next.js、TypeScript 和 Tailwind CSS。\n\n目标不是堆很多功能，而是让记录和维护都足够顺手。` },
 ];
 
-export const works = [
-  { title: '未命名的宇宙', type: '项目', year: '2026', gradient: 'from-[#90a58f] to-[#d2cbb8]' },
-  { title: '日光标本', type: '摄影', year: '持续收集', gradient: 'from-[#d8a99d] to-[#eee0ca]' },
-  { title: '柔软界面实验', type: '设计', year: '2026', gradient: 'from-[#b5c9c1] to-[#d8c4cc]' },
+export type Moment = { id: string; text: string; date: string; mood: string };
+export const initialMoments: Moment[] = [
+  { id: 'm1', text: '今天把旧博客翻出来了，决定认真地让它重新生长。', date: '08.22 12:40', mood: '🌱' },
+  { id: 'm2', text: '晚饭后吹到一点凉风，秋天好像正在来的路上。', date: '08.19 21:16', mood: '🍃' },
+  { id: 'm3', text: '终于弄懂了一个困扰很久的问题，记下来比“我会了”更可靠。', date: '08.16 18:02', mood: '💡' },
 ];

@@ -3,6 +3,8 @@ import { Noto_Sans_SC, Noto_Serif_SC } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/Navigation';
 import { CursorGlow } from '@/components/CursorGlow';
+import { StoreProvider } from '@/lib/store';
+import { Footer } from '@/components/Footer';
 
 const sans = Noto_Sans_SC({ subsets: ['latin'], variable: '--font-sans', weight: ['300', '400', '500'] });
 const serif = Noto_Serif_SC({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '600'] });
@@ -13,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-CN"><body className={`${sans.variable} ${serif.variable} font-sans antialiased`}><CursorGlow /><Navigation /><div className="relative z-10">{children}</div></body></html>;
+  return <html lang="zh-CN"><body className={`${sans.variable} ${serif.variable} font-sans antialiased`}><StoreProvider><CursorGlow /><Navigation /><div className="relative z-10">{children}</div><Footer /></StoreProvider></body></html>;
 }

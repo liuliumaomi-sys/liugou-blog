@@ -1,29 +1,12 @@
 'use client';
-
 import Link from 'next/link';
+import { ArrowRight, BookOpen, Coffee, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ArrowDownRight, Sparkles } from 'lucide-react';
-import { exhibits } from '@/data/content';
-
+import { useStore } from '@/lib/store';
+import { PostCard } from '@/components/PostCard';
+import { Cat } from '@/components/Cat';
 export default function Home() {
-  return (
-    <main className="min-h-screen overflow-hidden px-5 pt-28 md:px-10">
-      <section className="relative mx-auto flex min-h-[82vh] max-w-7xl items-center overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/25 px-7 py-16 shadow-gallery backdrop-blur-sm md:px-16">
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 55, repeat: Infinity, ease: 'linear' }} className="absolute -right-24 -top-36 h-[34rem] w-[34rem] rounded-[42%_58%_63%_37%] border border-moss/20 bg-moss/10" />
-        <motion.div animate={{ y: [0, -18, 0], rotate: [0, 4, 0] }} transition={{ duration: 9, repeat: Infinity }} className="absolute bottom-8 right-[12%] h-40 w-32 rounded-[50%_50%_12%_12%] bg-blush/25 blur-sm" />
-        <div className="relative max-w-4xl">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .2 }} className="mb-6 flex items-center gap-2 text-xs tracking-[.34em] text-moss uppercase"><Sparkles size={15} /> Online exhibition · 2026</motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }} className="font-serif text-[clamp(3.4rem,9vw,8.6rem)] leading-[.95] tracking-[-.04em] text-ink">欢迎来到<br /><span className="ml-[8vw] italic text-clay">我的数字美术馆</span></motion.h1>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .7 }} className="mt-10 flex flex-col gap-7 md:ml-[8vw] md:flex-row md:items-end">
-            <p className="max-w-xl text-base leading-8 text-ink/65 md:text-lg">这里收藏代码之外的温度、生活里的微光，和一个工程师没有说完的想象。请慢慢走，展厅永远为你亮着灯。</p>
-            <Link href="/exhibitions" className="group flex w-fit items-center gap-3 rounded-full bg-ink px-6 py-4 text-sm text-cream transition hover:bg-clay">进入展馆 <ArrowDownRight className="transition group-hover:rotate-45" size={18} /></Link>
-          </motion.div>
-        </div>
-      </section>
-      <section className="mx-auto grid max-w-7xl gap-5 py-24 md:grid-cols-3">
-        <div className="md:col-span-1"><p className="text-xs tracking-[.3em] text-moss">CURRENT EXHIBITION</p><h2 className="mt-4 font-serif text-4xl">此刻展出</h2></div>
-        {exhibits.slice(0, 2).map((item) => <Link href="/exhibitions" key={item.id} className="art-card rounded-[2rem] border border-white/60 bg-white/35 p-7"><span className="mb-12 block h-2 w-16 rounded-full" style={{ background: item.color }} /><p className="text-xs text-ink/45">{item.category} · {item.date}</p><h3 className="mt-3 font-serif text-2xl">{item.title}</h3><p className="mt-4 leading-7 text-ink/60">{item.excerpt}</p></Link>)}
-      </section>
-    </main>
-  );
+  const { posts, moments, profile, pet } = useStore(); const publicPosts = posts.filter(p => p.status === 'public');
+  return <main className="px-5 pb-24 pt-28 md:px-10"><section className="mx-auto grid min-h-[72vh] max-w-7xl items-center gap-8 overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/30 px-7 py-14 shadow-gallery md:grid-cols-[1.25fr_.75fr] md:px-14"><motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}><p className="flex items-center gap-2 text-xs tracking-[.3em] text-moss"><Sparkles size={14} /> WELCOME TO MY CORNER</p><h1 className="mt-6 font-serif text-[clamp(3.2rem,7vw,7rem)] leading-[.98]">嗨，我是<br /><i className="text-clay">{profile.nickname}</i></h1><p className="mt-7 max-w-xl text-lg leading-9 text-ink/60">{profile.intro}</p><div className="mt-9 flex flex-wrap gap-3"><Link href="/posts" className="flex items-center gap-2 rounded-full bg-ink px-6 py-4 text-sm text-cream">看看最近写了什么 <ArrowRight size={16} /></Link><Link href="/guestbook" className="rounded-full border border-ink/15 px-6 py-4 text-sm">来打个招呼</Link></div></motion.div><div className="relative flex min-h-96 items-end justify-center rounded-[2.5rem] bg-gradient-to-b from-[#dfe8da] to-[#ecdaca] p-8"><div className="absolute left-7 top-7 rounded-2xl bg-cream/60 p-4 text-sm"><p className="text-xs text-ink/40">灰灰今天</p><p className="mt-1">心情不错，等你来玩</p></div><Cat /><div className="absolute bottom-6 right-6 rounded-full bg-white/60 px-4 py-2 text-xs">亲密度 {pet.affection}%</div></div></section><section className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-3"><Status icon={<Coffee />} label="最近在做" value={profile.doing} /><Status icon={<BookOpen />} label="最近在学" value={profile.learning} /><Status icon={<Cat small />} label="灰灰的小窝" value={`已有 ${pet.items.length} 件装饰`} link="/cat" /></section><section className="mx-auto mt-24 max-w-7xl"><div className="mb-9 flex items-end justify-between"><div><p className="text-xs tracking-[.28em] text-moss">RECENT POSTS</p><h2 className="mt-3 font-serif text-4xl">最近写下的</h2></div><Link href="/posts" className="text-sm text-ink/50 hover:text-ink">查看全部 →</Link></div><div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{publicPosts.slice(0, 3).map(post => <PostCard key={post.id} post={post} />)}</div></section><section className="mx-auto mt-24 grid max-w-7xl gap-8 rounded-[2.5rem] bg-[#e5eadf] p-8 md:grid-cols-[.6fr_1.4fr] md:p-12"><div><p className="text-xs tracking-[.28em] text-moss">QUICK MOMENTS</p><h2 className="mt-3 font-serif text-4xl">一些短句</h2><Link href="/moments" className="mt-6 inline-block text-sm">继续翻翻 →</Link></div><div className="grid gap-3">{moments.slice(0, 3).map(m => <div key={m.id} className="rounded-2xl bg-white/45 p-5"><span className="mr-3">{m.mood}</span><span className="text-ink/65">{m.text}</span><span className="mt-2 block text-right text-xs text-ink/30">{m.date}</span></div>)}</div></section></main>;
 }
+function Status({ icon, label, value, link }: { icon: React.ReactNode; label: string; value: string; link?: string }) { const box = <div className="flex h-full items-center gap-4 rounded-3xl border border-white/60 bg-white/30 p-5"><div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-moss/10 text-moss">{icon}</div><div><p className="text-xs text-ink/35">{label}</p><p className="mt-1 text-sm">{value}</p></div></div>; return link ? <Link href={link}>{box}</Link> : box; }

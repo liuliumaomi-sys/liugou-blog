@@ -7,8 +7,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const links = [
-  ['/', '大厅'], ['/exhibitions', '文章展厅'], ['/works', '作品展厅'],
-  ['/garden', '数字花园'], ['/companion', '守护宠物'], ['/about', '关于'],
+  ['/', '首页'], ['/posts', '文章'], ['/moments', '动态'],
+  ['/cat', '灰灰的小窝'], ['/guestbook', '留言'], ['/about', '关于我'],
 ];
 
 export function Navigation() {
@@ -17,7 +17,7 @@ export function Navigation() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8">
       <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/60 bg-cream/75 px-5 py-3 shadow-sm backdrop-blur-xl">
-        <Link href="/" className="font-serif text-lg tracking-wide text-ink">LIUGOU · GALLERY</Link>
+        <Link href="/" className="font-serif text-lg text-ink">Liugou’s Corner</Link>
         <div className="hidden items-center gap-1 lg:flex">
           {links.map(([href, label]) => (
             <Link key={href} href={href} className={`rounded-full px-3 py-2 text-sm transition ${path === href ? 'bg-ink text-cream' : 'text-ink/60 hover:bg-white/60 hover:text-ink'}`}>{label}</Link>
