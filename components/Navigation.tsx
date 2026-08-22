@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const links = [
   ['/', '首页'], ['/posts', '文章'], ['/moments', '动态'],
-  ['/cat', '灰灰的小窝'], ['/guestbook', '留言'], ['/about', '关于我'],
+  ['/cat', '灰灰的小窝'], ['/guestbook', '留言'], ['/about', '关于我'], ['/admin', '主人入口'],
 ];
 
 export function Navigation() {
