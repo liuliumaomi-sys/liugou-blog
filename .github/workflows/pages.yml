@@ -1,4 +1,4 @@
-name: Deploy Hexo to GitHub Pages
+name: Deploy Next.js Gallery to GitHub Pages
 
 on:
   push:
